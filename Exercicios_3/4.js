@@ -1,0 +1,1 @@
+// 4.Simular um sistema de atendimento usando push e shift para adicionar e remover clientes da fila.
