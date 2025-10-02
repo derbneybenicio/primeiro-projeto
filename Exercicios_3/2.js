@@ -15,7 +15,7 @@ let ListaDeNotas = alunos.map((nota) => nota.notas);
 for(let i = 0; i <= ListaDeNotas.length; i++){
     let nomes = alunos.filter((nomeDoAluno) => nomeDoAluno.notas === ListaDeNotas[i])
 
-    for()let j = 0; j <=
+    for(let j = 0; j <= alunos.length; j++)
      somador = 0;
     somador += ListaDeNotas[i]
     let media = somador / ListaDeNotas.length;

@@ -44,28 +44,28 @@ const carrinho = [
     { nome: "café", preco: 14, quantidade: 800 },
     { nome: "açucar", preco: 4, quantidade: 150 }
 ];
-////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 function calcularTotal(carrinhoParametro){
     const compraTotal = carrinhoParametro.reduce((acc, cur) => acc + (cur.preco * cur.quantidade), 0);
     return compraTotal
 }
-//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 function adicionarProduto(nome, preco, quantidade, carrinhoParametro){
     const produto = {nome: nome, preco: preco, quantidade: quantidade};
     carrinhoParametro.push(produto);
+    produto
     return carrinhoParametro
 }
 
-///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 function aplicarDesconto(percentual){
-    const desconto = percentual / 100
+    const desconto = percentual / 100;
     const somaAtualizada = calcularTotal(carrinho)
     const compraComDesconto = somaAtualizada - (somaAtualizada * desconto)
     return compraComDesconto
 }
-////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const compraTotal = calcularTotal(carrinho)
 console.log("Carrinho Original: ", carrinho);
@@ -77,17 +77,44 @@ const totalAtualizado = calcularTotal(carrinho)
 const compraComDescontoAtualizada = aplicarDesconto(30)
 
 
-
-
 console.log("total atualizado: ", totalAtualizado);
 console.log("Compra Atualizada com desconto: ", compraComDescontoAtualizada);
 
-//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function removerProduto(carrinho){
-       const removerIten = carrinho.filter((iten) => iten.nome != "arroz");
-    return removerIten
+function removerProduto(nome){
+    const itenEscolhido = carrinho.findIndex((iten) => iten.nome == nome );
+    if(itenEscolhido == -1){
+        return {Erro: "produto não encontrado"}
+    } else {
+        const removerIten = carrinho.splice(itenEscolhido, 1);
+     return removerIten
+    }
+     
+}   
+
+const produtoRemovido = removerProduto("feijão")
+console.log("Produto Removido: ", produtoRemovido)
+console.log("Carrinho Atualizado:", carrinho)
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function filtrarValores(valor){
+    const filtro = carrinho.filter((preco) => (preco.preco * preco.quantidade) >= valor);
+    return {resultado: filtro }
+}
+const produtoAcimaDe500 = filtrarValores(500)
+console.log("Produtos acima de R$ 500,00", produtoAcimaDe500)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function ValorMedioDosProdutos(carrinhoParametro2){
+    const quantidadeTotalDeProdutos = calcularTotal(carrinho)
+    const somaDaQuantidade = carrinhoParametro2.reduce((acc, cur) => acc + cur.quantidade, 0);
+    somaDaQuantidade
+    const media = quantidadeTotalDeProdutos / somaDaQuantidade
+    return media
 }
 
-const carrinhoComItenRemovido = removerProduto(carrinho)
-console.log("Carrinho com produto removido: ", carrinhoComItenRemovido)
+const mediaAtualizada = ValorMedioDosProdutos(carrinho)
+console.log("Valor Médio dos Produtos do Carrinho", mediaAtualizada)
